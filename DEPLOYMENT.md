@@ -23,10 +23,20 @@ This application requires:
 4. **Render will auto-detect `render.yaml`** and create:
    - Web service
    - PostgreSQL database
-   - Redis instance
-   - All environment variables
+   - Most environment variables
 
-5. **Click "Apply"** - Render handles everything!
+5. **Click "Apply"** - Render will create the web service and database
+
+6. **Create Redis manually** (Render Blueprints don't support Redis):
+   - In Render Dashboard → New → Redis
+   - Name: `order-execution-redis`
+   - Plan: Free
+   - Copy the **Internal Redis URL**
+
+7. **Add Redis URL to your web service:**
+   - Go to your web service → Environment
+   - Add/Update: `REDIS_URL` = `<the Redis URL you copied>`
+   - Save changes (service will redeploy automatically)
 
 #### Option B: Manual Setup
 

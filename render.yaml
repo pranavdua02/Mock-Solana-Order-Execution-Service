@@ -24,10 +24,6 @@ services:
         value: 2000
       - key: DEX_PRICE_VARIATION_BPS
         value: 250
-      - key: REDIS_URL
-        fromDatabase:
-          name: order-execution-redis
-          property: connectionString
       - key: PGHOST
         fromDatabase:
           name: order-execution-db
@@ -51,11 +47,9 @@ services:
 
 databases:
   - name: order-execution-db
+    type: postgresql
     plan: free
     databaseName: orders
     user: postgres
-
-  - name: order-execution-redis
-    plan: free
-    type: redis
+    ipAllowList: []
 

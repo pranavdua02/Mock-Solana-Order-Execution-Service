@@ -48,7 +48,7 @@ services:
 databases:
   - name: order-execution-db
     databaseName: orders
-    user: postgres
+    user: order_user
     plan: free
     postgresMajorVersion: "16"
 

@@ -1,0 +1,61 @@
+services:
+  - type: web
+    name: order-execution-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: ORDER_QUEUE_NAME
+        value: order-execution
+      - key: ORDER_MAX_CONCURRENCY
+        value: 10
+      - key: ORDER_MAX_PER_MINUTE
+        value: 100
+      - key: WS_HEARTBEAT_INTERVAL_MS
+        value: 10000
+      - key: DEX_ROUTE_DELAY_MS
+        value: 2000
+      - key: DEX_PRICE_VARIATION_BPS
+        value: 250
+      - key: REDIS_URL
+        fromDatabase:
+          name: order-execution-redis
+          property: connectionString
+      - key: PGHOST
+        fromDatabase:
+          name: order-execution-db
+          property: host
+      - key: PGPORT
+        fromDatabase:
+          name: order-execution-db
+          property: port
+      - key: PGDATABASE
+        fromDatabase:
+          name: order-execution-db
+          property: database
+      - key: PGUSER
+        fromDatabase:
+          name: order-execution-db
+          property: user
+      - key: PGPASSWORD
+        fromDatabase:
+          name: order-execution-db
+          property: password
+
+databases:
+  - name: order-execution-db
+    plan: free
+    databaseName: orders
+    user: postgres
+
+  - name: order-execution-redis
+    plan: free
+    type: redis
+

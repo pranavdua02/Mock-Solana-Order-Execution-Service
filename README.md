@@ -97,6 +97,21 @@ npm run dev
 - **Sniper orders**: plug a launch-detection listener ahead of the queue to auto-release jobs when a mint becomes live, streaming the identical statuses back to clients.
 
 ### Deploying
-The provided Dockerfile builds the TypeScript project; combine with the `docker-compose.yml` or any hosting provider (Fly.io, Render, Railway) pointing to the same Postgres/Redis services. Document the resulting public URL + screencast link in this README once deployed.*** End Patch
+
+**⚠️ Important**: This is a backend API with WebSocket support, PostgreSQL, and Redis. It cannot be deployed to static hosting like Vercel or GitHub Pages.
+
+**Recommended platforms** (all support Node.js, WebSockets, PostgreSQL, and Redis):
+- **Render** (easiest, free tier available) - Recommended
+- **Railway** (simple setup, good free tier)
+- **Fly.io** (excellent WebSocket support)
+- **DigitalOcean App Platform** (reliable, managed services)
+
+See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for detailed step-by-step instructions for each platform.
+
+The provided Dockerfile builds the TypeScript project and can be used with any Docker-compatible hosting provider.
+
+**After deployment**, update this README with:
+- Public API URL
+- YouTube demo video link*** End Patch
 
 

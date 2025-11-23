@@ -47,9 +47,8 @@ services:
 
 databases:
   - name: order-execution-db
-    type: postgresql
-    plan: free
     databaseName: orders
     user: postgres
-    ipAllowList: []
+    plan: free
+    postgresMajorVersion: "16"
 

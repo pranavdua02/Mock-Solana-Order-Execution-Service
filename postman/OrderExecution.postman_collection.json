@@ -1,0 +1,66 @@
+{
+  "info": {
+    "_postman_id": "e7e1e4cf-0a1f-4f38-9c21-01b1ebcd0000",
+    "name": "Order Execution Engine",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Execute Market Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"baseMint\": \"SOL\",\n  \"quoteMint\": \"USDC\",\n  \"side\": \"buy\",\n  \"amount\": 1,\n  \"slippageBps\": 250\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/orders/execute",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "orders", "execute"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "WebSocket Status Stream",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "ws://{{baseHost}}/api/orders/execute?orderId={{orderId}}",
+          "host": ["ws://{{baseHost}}"],
+          "path": ["api", "orders", "execute"],
+          "query": [
+            {
+              "key": "orderId",
+              "value": "{{orderId}}",
+              "description": "Order identifier returned by the POST endpoint"
+            }
+          ]
+        },
+        "description": "Use the WebSocket client in Postman to subscribe to real-time status updates."
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "baseHost",
+      "value": "localhost:4000"
+    },
+    {
+      "key": "orderId",
+      "value": ""
+    }
+  ]
+}
+
+
